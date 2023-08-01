@@ -23,9 +23,8 @@ Each deck will have a review function similar to Anki. Reviewing means that the 
 
 |  Page           |   Done     |
 |----------       |  ----------
-| Main page       | ❌❌❌    |
-| Register page   | ❌❌❌    |
-| Login page      | ❌❌❌    |
+| Login page      | ✅✅❌    |
+| Register page   | ✅✅❌    |
 | Profile         | ❌❌❌    |
 | Decks           | ❌❌❌    |
 | Deck            | ❌❌❌    |
@@ -39,6 +38,7 @@ Each deck will have a review function similar to Anki. Reviewing means that the 
 |----------          |  ----------       |
 | user_id (PK, AI)   | int(11)           |
 | nickname           | varchar(20)       |
+| email              | varchar(20)       |
 | pass               | varchar(255)  $!  |
 
 ### decks
