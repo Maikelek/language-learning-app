@@ -1,8 +1,32 @@
-import React from 'react';
+import React, { useState }  from 'react';
+
 import bobur from '../../data/bobr.png';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 const Register = () => {
+
+  const [eye, setEye] = useState(faEye);
+
+  function passToggle() {
+    let pass = document.getElementById("pass");
+    let pass_repeat = document.getElementById("pass_repeat");
+
+    if (pass.type === "password") {
+      pass.type = "type"
+      pass_repeat.type = "type"
+      setEye(faEyeSlash)
+    }
+
+    else {
+      pass.type = "password"
+      pass_repeat.type = "password"
+      setEye(faEye)
+    }
+
+  }
+
   return (
     <div className="not-logged-holder">
 
@@ -33,6 +57,7 @@ const Register = () => {
           <div className="label-input">
             <label htmlFor="pass_repeat">Repeat Password</label>
             <input type="password" id="pass_repeat" placeholder='******' />
+            <FontAwesomeIcon onClick={passToggle} icon={eye}  className='label-input-eye'/>
           </div>
 
           <button className='not-logged-button'>Login</button>

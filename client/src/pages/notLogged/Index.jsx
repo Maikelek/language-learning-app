@@ -1,8 +1,29 @@
-import React from 'react';
-import bobur from '../../data/bobr.png';
+import React, { useState }  from 'react';
 import { Link } from 'react-router-dom';
 
+import bobur from '../../data/bobr.png';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+
 const Index = () => {
+
+  const [eye, setEye] = useState(faEye);
+
+  function passToggle() {
+    let pass = document.getElementById("pass");
+
+    if (pass.type === "password") {
+      pass.type = "type"
+      setEye(faEyeSlash)
+    }
+
+    else {
+      pass.type = "password"
+      setEye(faEye)
+    }
+
+  }
+
   return (
     <div className="not-logged-holder">
 
@@ -23,6 +44,7 @@ const Index = () => {
           <div className="label-input">
             <label htmlFor="pass">Password</label>
             <input type="password" id="pass" placeholder='******' />
+            <FontAwesomeIcon onClick={passToggle} icon={eye}  className='label-input-eye'/>
           </div>
 
           <button className='not-logged-button'>Login</button>
