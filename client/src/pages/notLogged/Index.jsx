@@ -8,6 +8,14 @@ import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 const Index = () => {
 
   const [eye, setEye] = useState(faEye);
+  const [user, setUser] = useState({ 
+    email: "",
+    pass: "",
+  });
+
+  const handleChange = (e) => {
+    setUser(prev => ({...prev, [e.target.name]: e.target.value})); 
+  };
 
   function passToggle() {
     let pass = document.getElementById("pass");
@@ -37,13 +45,25 @@ const Index = () => {
           <p>Welcome to language learning app</p>
 
           <div className="label-input">
-            <label htmlFor="name">Name</label>
-            <input type="text" id="name" placeholder='Insert your name' />
+            <label htmlFor="name">E-mail</label>
+            <input 
+              type="text" 
+              id="email" 
+              name='email'
+              placeholder='Insert your e-mail' 
+              onChange={handleChange} 
+              />
           </div>
 
           <div className="label-input">
             <label htmlFor="pass">Password</label>
-            <input type="password" id="pass" placeholder='******' />
+            <input 
+              type="password" 
+              id="pass" 
+              name='pass'
+              placeholder='******' 
+              onChange={handleChange} 
+              />
             <FontAwesomeIcon onClick={passToggle} icon={eye}  className='label-input-eye'/>
           </div>
 

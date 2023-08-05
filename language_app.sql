@@ -19,9 +19,9 @@ CREATE TABLE `decks` (
 CREATE TABLE `users` (
   `user_id` int(11) NOT NULL,
   `nickname` varchar(20) NOT NULL,
+  `email` varchar(40) NOT NULL,
   `pass` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
 
 ALTER TABLE `cards`
   ADD PRIMARY KEY (`card_id`);

@@ -8,6 +8,16 @@ import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 const Register = () => {
 
   const [eye, setEye] = useState(faEye);
+  const [user, setUser] = useState({ 
+    name: "",
+    email: "",
+    pass: "",
+    pass_repeat: ""
+  });
+
+  const handleChange = (e) => {
+    setUser(prev => ({...prev, [e.target.name]: e.target.value})); 
+  };
 
   function passToggle() {
     let pass = document.getElementById("pass");
@@ -41,22 +51,46 @@ const Register = () => {
 
           <div className="label-input">
             <label htmlFor="name">Name</label>
-            <input type="text" id="name" placeholder='Insert your name' />
+            <input 
+              type="text" 
+              id="name" 
+              name="name" 
+              placeholder='Insert your name' 
+              onChange={handleChange} 
+              />
           </div>
 
           <div className="label-input">
             <label htmlFor="email">Email</label>
-            <input type="text" id="email" placeholder='Insert your email' />
+            <input 
+              type="text" 
+              id="email" 
+              name="email" 
+              placeholder='Insert your email' 
+              onChange={handleChange} 
+              />
           </div>
 
           <div className="label-input">
             <label htmlFor="pass">Password</label>
-            <input type="password" id="pass" placeholder='******' />
+            <input 
+              type="password" 
+                id="pass" 
+                name="pass" 
+                placeholder='******' 
+                onChange={handleChange} 
+                />
           </div>
 
           <div className="label-input">
             <label htmlFor="pass_repeat">Repeat Password</label>
-            <input type="password" id="pass_repeat" placeholder='******' />
+            <input 
+              type="password" 
+                id="pass_repeat" 
+                name="pass_repeat" 
+                placeholder='******' 
+                onChange={handleChange} 
+                />
             <FontAwesomeIcon onClick={passToggle} icon={eye}  className='label-input-eye'/>
           </div>
 

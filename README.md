@@ -38,7 +38,7 @@ Each deck will have a review function similar to Anki. Reviewing means that the 
 |----------          |  ----------       |
 | user_id (PK, AI)   | int(11)           |
 | nickname           | varchar(20)       |
-| email              | varchar(20)       |
+| email              | varchar(40)       |
 | pass               | varchar(255)  $!  |
 
 ### decks
