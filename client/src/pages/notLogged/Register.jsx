@@ -1,13 +1,16 @@
 import React, { useState }  from 'react';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 import bobur from '../../data/bobr.png';
-import { Link } from 'react-router-dom';
+import config from '../../config/Config';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 const Register = () => {
 
   const [eye, setEye] = useState(faEye);
+  const [msg, setMsg] = useState({});
   const [user, setUser] = useState({ 
     name: "",
     email: "",
@@ -34,8 +37,30 @@ const Register = () => {
       pass_repeat.type = "password"
       setEye(faEye)
     }
-
   }
+
+  const handleClick = async (e) => {
+    e.preventDefault();
+  
+    try {
+      const response = await axios.post(`${config.apiUrl}/register`, user, {
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        withCredentials: true
+      });
+  
+      if (response.data.message === "ok") {
+        console.log("test");
+      } else {
+        setMsg(response.data);
+        console.log(msg)
+      }
+    } catch (error) {
+      console.log(error);
+      alert(error);
+    }
+  };
 
   return (
     <div className="not-logged-holder">
@@ -45,7 +70,7 @@ const Register = () => {
           <img src={bobur} alt="das" />
         </div>
 
-        <form className="landing-form">
+        <form className="landing-form" onSubmit={handleClick}>
           <h1>Register Form</h1>
           <p>Create your account and learn</p>
 

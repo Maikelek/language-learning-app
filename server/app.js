@@ -18,8 +18,13 @@ app.use(cors({
 
 app.get("/", (req, res) => { 
   return res.json("Backend server VerboLingo");
-
 })
+
+const registerRouter = require('./routes/registerRouter');
+app.use('/register', registerRouter);
+
+const authRouter = require('./routes/authRouter');
+app.use('/auth', authRouter);
 
 app.listen(process.env.PORT, () =>{      
     console.log("Backend is on port " + process.env.PORT);
