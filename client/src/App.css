@@ -76,17 +76,24 @@ body {
   width: 50%;
 }
 
-.label-input label {
+.label-classic {
   font-size: 1rem;
   font-weight: bold;
   margin-bottom: 0.5rem;
   color: #333;
 }
 
-.label-input input {
+.input-classic {
   padding: 0.5rem;
   font-size: 1rem;
   border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.input-error {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid rgb(228, 2, 2);;
   border-radius: 3px;
 }
 
@@ -118,6 +125,21 @@ body {
   margin-right: 1rem;
   position: absolute;
   cursor: pointer;
+}
+
+.label-error {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: rgb(228, 2, 2);
+}
+
+.login-error {
+  color: rgb(228, 2, 2);
+}
+
+.login-success {
+  color: rgb(13, 143, 41);
 }
 
 @media (max-width: 768px) {

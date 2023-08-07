@@ -66,24 +66,26 @@ const Index = () => {
           <p>Welcome to the language learning app</p>
 
           <div className="label-input">
-            <label htmlFor="email">E-mail</label>
+            <label htmlFor="email" className="label-classic">E-mail</label>
             <input 
               type="text" 
               id="email" 
               name='email'
               placeholder='Insert your e-mail' 
               onChange={handleChange} 
+              className="input-classic"
             />
           </div>
 
           <div className="label-input">
-            <label htmlFor="pass">Password</label>
+            <label htmlFor="pass" className="label-classic">Password</label>
             <input 
               type="password" 
               id="pass" 
               name='pass'
               placeholder='******' 
               onChange={handleChange} 
+              className="input-classic"
             />
             <FontAwesomeIcon onClick={passToggle} icon={eye} className='label-input-eye'/>
           </div>

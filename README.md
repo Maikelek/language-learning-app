@@ -24,7 +24,7 @@ Each deck will have a review function similar to Anki. Reviewing means that the 
 |  Page           |   Done     |
 |----------       |  ----------
 | Login page      | ✅✅❌    |
-| Register page   | ✅✅❌    |
+| Register page   | ✅✅✅    |
 | Profile         | ❌❌❌    |
 | Decks           | ❌❌❌    |
 | Deck            | ❌❌❌    |
