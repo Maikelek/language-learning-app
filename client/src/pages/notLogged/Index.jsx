@@ -5,12 +5,13 @@ import { Link } from 'react-router-dom';
 import bobur from '../../data/bobr.png';
 import config from '../../config/Config';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import { faEye, faEyeSlash, faHeart } from '@fortawesome/free-solid-svg-icons';
 
 const Index = () => {
 
   const [eye, setEye] = useState(faEye);
   const [msg, setMsg] = useState({});
+  const [error, setError] = useState(false)
   const [user, setUser] = useState({ 
     email: "",
     pass: "",
@@ -34,6 +35,15 @@ const Index = () => {
 
   const handleClick = async (e) => {
     e.preventDefault();
+
+    if (!user.email) {
+      return setError(true);
+    }
+
+    if (!user.pass) {
+      return setError(true);
+    }
+    
   
     try {
       const response = await axios.post(`${config.apiUrl}/auth`, user, {
@@ -66,30 +76,33 @@ const Index = () => {
           <p>Welcome to the language learning app</p>
 
           <div className="label-input">
-            <label htmlFor="email" className="label-classic">E-mail</label>
+            <label htmlFor="email" className={error && user.email.length <=0  ? 'label-error' : "label-classic"}>{error && user.email.length <=0 ? "Insert your e-mail!" : "E-mail"}</label>
             <input 
               type="text" 
               id="email" 
-              name='email'
-              placeholder='Insert your e-mail' 
+              name="email" 
+              placeholder='Insert your email' 
               onChange={handleChange} 
-              className="input-classic"
-            />
+              className={error && user.email.length <=0  ? 'input-error' : "input-classic"}
+              />
           </div>
 
           <div className="label-input">
-            <label htmlFor="pass" className="label-classic">Password</label>
+            <label htmlFor="pass" className={error && user.pass.length <=0  ? 'label-error' : "label-classic"}>{error && user.pass.length <=0 ? "Insert your password!" : "Password"}</label>
             <input 
               type="password" 
-              id="pass" 
-              name='pass'
-              placeholder='******' 
-              onChange={handleChange} 
-              className="input-classic"
-            />
+                id="pass" 
+                name="pass" 
+                placeholder='******' 
+                onChange={handleChange} 
+                className={error && user.pass.length <=0  ? 'input-error' : "input-classic"}
+                />
+
             <FontAwesomeIcon onClick={passToggle} icon={eye} className='label-input-eye'/>
           </div>
 
+          {msg.message ? <h5 className='login-error'> {msg.message}</h5>: null }
+          {msg.messageGreen ? <h5 className="login-success"> {msg.messageGreen} <FontAwesomeIcon  icon={faHeart} /></h5> : null }
           <button className='not-logged-button' type="submit">Login</button>
           <p style={{ marginTop: "10px" }}>Don't have an account? <Link to="/register" style={{color: "#098be7"}}>Register here</Link></p>
         </form>
