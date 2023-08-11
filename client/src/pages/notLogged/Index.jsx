@@ -1,6 +1,6 @@
-import React, { useState }  from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import bobur from '../../data/bobr.png';
 import config from '../../config/Config';
@@ -8,27 +8,27 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash, faHeart } from '@fortawesome/free-solid-svg-icons';
 
 const Index = () => {
-
+  const nav = useNavigate();
   const [eye, setEye] = useState(faEye);
   const [msg, setMsg] = useState({});
-  const [error, setError] = useState(false)
-  const [user, setUser] = useState({ 
-    email: "",
-    pass: "",
+  const [error, setError] = useState(false);
+  const [user, setUser] = useState({
+    email: '',
+    pass: '',
   });
 
   const handleChange = (e) => {
-    setUser(prev => ({...prev, [e.target.name]: e.target.value})); 
+    setUser((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   const passToggle = () => {
-    let pass = document.getElementById("pass");
+    let pass = document.getElementById('pass');
 
-    if (pass.type === "password") {
-      pass.type = "text"; 
+    if (pass.type === 'password') {
+      pass.type = 'text';
       setEye(faEyeSlash);
     } else {
-      pass.type = "password";
+      pass.type = 'password';
       setEye(faEye);
     }
   };
@@ -36,25 +36,21 @@ const Index = () => {
   const handleClick = async (e) => {
     e.preventDefault();
 
-    if (!user.email) {
-      return setError(true);
+    if (!user.email || !user.pass) {
+      setError(true);
+      return;
     }
 
-    if (!user.pass) {
-      return setError(true);
-    }
-    
-  
     try {
       const response = await axios.post(`${config.apiUrl}/auth`, user, {
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
-        withCredentials: true
+        withCredentials: true,
       });
-  
-      if (response.data.message === "ok") {
-        console.log("test");
+
+      if (response.data.message === 'ok') {
+        nav('/Decks');
       } else {
         setMsg(response.data);
       }

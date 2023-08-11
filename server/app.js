@@ -1,6 +1,7 @@
 const express = require('express'); 
 const cors = require("cors"); 
 const bodyParser = require('body-parser');
+const session = require('express-session');
 
 require("dotenv").config();
 
@@ -14,6 +15,18 @@ app.use(cors({
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 }));
+
+app.use(
+  session({
+    key: "user",
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      expires: 86400000 // 1 day
+    }
+})
+);
 
 
 app.get("/", (req, res) => { 
