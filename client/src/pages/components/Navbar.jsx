@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import axios from 'axios';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import config from '../../config/Config';
 
 const Navbar = () => {
+  const nav = useNavigate();
   const [isNavActive, setIsNavActive] = useState(false);
   const location = useLocation();
 
@@ -17,6 +20,25 @@ const Navbar = () => {
   const toggleNav = () => {
     setIsNavActive(!isNavActive);
     document.body.style.overflow = isNavActive ? 'visible' : 'hidden';
+  };
+
+  const handleLogout = async e => {   
+    e.preventDefault();
+    try {
+      const response = await axios.delete(`${config.apiUrl}/auth`, {
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        withCredentials: true
+      });
+      if (response.data.logout === true) {
+        localStorage.removeItem('user');
+        nav("/");
+      }
+    } catch (error) {
+      console.log(error);
+      alert(error);
+    }
   };
 
   return (
@@ -53,7 +75,7 @@ const Navbar = () => {
         </li>
 
         <li>
-          <Link to="/logout" className="nav-link">
+          <Link onClick={handleLogout} className="nav-link">
             Log out
           </Link>
         </li>

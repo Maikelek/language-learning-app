@@ -50,6 +50,7 @@ const Index = () => {
       });
 
       if (response.data.message === 'ok') {
+        localStorage.setItem('user', response.data.user.id);
         nav('/Decks');
       } else {
         setMsg(response.data);

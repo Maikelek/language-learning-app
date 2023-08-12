@@ -3,6 +3,7 @@ const router = express.Router();
 const authController = require('../controllers/authController');
 
 router.route("/")  
-    .post(authController.isUserValid);
+    .post(authController.isUserValid)
+    .delete(authController.deleteSession);
 
 module.exports = router;

@@ -14,10 +14,10 @@ const isUserValid = (req, res) => {
     else {
         db.query("SELECT * FROM `users` WHERE email = ?", [email], async (error, results) => {
             if (await bcrypt.compare(pass, results[0].pass)) {
-                const user = {id: results[0].id, nickname:results[0].nickname, email: results[0].email}
+                const user = {id: results[0].user_id, nickname:results[0].nickname, email: results[0].email}
                 req.session.user = user;
 
-                return res.json({ message: "ok"});
+                return res.json({ message: "ok", user});
             }
 
             else {
@@ -30,13 +30,29 @@ const isUserValid = (req, res) => {
                     return res.json({ message: "Forgot your email or password?" });
                 } else {
                     return res.json({ message: "Please write correct email or password!" });
-                }
-                
+                }  
             }
         }
     )}
 }
 
+const deleteSession = (req, res) => {
+    if ( req.session.user ) {
+        req.session.destroy(err => {
+            if (err) {
+                res.send({logout: false, message: "Problem with logging out"})
+            } else {
+                res.send({logout: true}) 
+            }
+        })
+    } 
+    
+    else {
+          res.send({logout: false, message: "Session does not exist"})
+       }
+}
+
 module.exports = {
-    isUserValid
+    isUserValid,
+    deleteSession
 }
