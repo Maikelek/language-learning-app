@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
 
 import bobur from '../../data/bobr.png';
 import config from '../../config/Config';
@@ -46,18 +47,19 @@ const Index = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        withCredentials: true,
+        withCredentials: true, // Send cookies with the request
       });
 
       if (response.data.message === 'ok') {
-        localStorage.setItem('user', response.data.user.id);
+        Cookies.set('user', response.data.user.id, { secure: true, sameSite: 'strict' });
+        console.log(Cookies.get('user'))
         nav('/Decks');
       } else {
         setMsg(response.data);
       }
     } catch (error) {
-      console.log(error);
-      alert(error);
+      console.error(error);
+      alert('An error occurred. Please try again.');
     }
   };
 

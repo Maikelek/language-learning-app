@@ -1,13 +1,13 @@
 const express = require('express'); 
 const cors = require("cors"); 
-const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 const session = require('express-session');
 
 require("dotenv").config();
 
 const app = express()
 
-app.use(bodyParser.urlencoded({extended: true}));  
+app.use(cookieParser());
 app.use(express.json());
 
 app.use(cors({
@@ -21,10 +21,13 @@ app.use(
     key: "user",
     secret: process.env.SESSION_SECRET,
     resave: false,
-    saveUninitialized: false,
+    saveUninitialized: true,
     cookie: {
-      expires: 86400000 // 1 day
-    }
+      secure: true, 
+      httpOnly: true,
+      sameSite: 'strict', 
+      maxAge: 86400000, 
+    },
 })
 );
 
