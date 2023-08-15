@@ -38,12 +38,7 @@ const isUserValid = (req, res) => {
           return res.json({ message: "Failed to generate token" });
         }
   
-        return res.cookie("token", token, {
-          httpOnly: true,
-          secure: true,
-          sameSite: "strict",
-          maxAge: 86400000, // 1day
-        }).json({ message: "ok", user });;
+        return res.json({ token, message: "ok" });;
   
       });
     });
