@@ -1,5 +1,3 @@
-/* Login Page Styles */
-
 * {
   margin: 0;
   padding: 0;
@@ -7,13 +5,13 @@
   outline: none;
   font-family: 'Montserrat', sans-serif;
 }
-  
+
 body {
-  background-color: #f0f0f0;
+  background-color: #121212;
 }
-  
+
 /* LOGIN && REGISTER */
-  
+
 .not-logged-holder {
   display: flex;
   width: 100%;
@@ -25,7 +23,7 @@ body {
 .landing-container {
   display: flex;
   width: 60%;
-  box-shadow: 8px 8px 12px rgba(0, 0, 0, 0.4);
+  background-color: #1e1e1e;
 }
 
 .landing-photo {
@@ -33,7 +31,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #73c2fb;
+  background-color: #2b2b2b;
   overflow: hidden;
 }
 
@@ -49,7 +47,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #fff;
+  background-color: #1e1e1e;
   padding: 2rem;
   border-radius: 5px;
 }
@@ -59,17 +57,18 @@ body {
   font-weight: bold;
   margin-bottom: 1rem;
   text-align: center;
-  color: #333;
+  color: #fff;
 }
 
 .landing-form p {
   font-size: 1rem;
   margin-bottom: 2rem;
   text-align: center;
-  color: #777;
+  color: #aaa;
 }
 
 .label-input {
+  color: #fff;
   display: flex;
   flex-direction: column;
   margin-bottom: 1rem;
@@ -80,21 +79,17 @@ body {
   font-size: 1rem;
   font-weight: bold;
   margin-bottom: 0.5rem;
-  color: #333;
+  color: #fff;
 }
 
-.input-classic {
-  padding: 0.5rem;
-  font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 3px;
-}
-
+.input-classic,
 .input-error {
   padding: 0.5rem;
   font-size: 1rem;
-  border: 1px solid rgb(228, 2, 2);;
+  border: 1px solid #555;
   border-radius: 3px;
+  background-color: #333;
+  color: #fff;
 }
 
 .not-logged-button {
@@ -102,21 +97,21 @@ body {
   font-size: 0.9rem;
   width: 60%;
   align-self: center;
-  background-color: #3fa8f3;
+  background-color: #4a90e2;
   color: #fff;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  transition:  0.3s ease;
+  transition: 0.3s ease;
   box-shadow: 3px 2px 12px rgba(0, 0, 0, 0.4);
   text-transform: uppercase;
   letter-spacing: 1px;
   margin-top: 1rem;
 }
-  
+
 .not-logged-button:hover {
-  background-color: #67a0c9;
-  transform: translateY(2px);
+  background-color: rgb(45, 117, 168);
+  transform: translateY(1px);
 }
 
 .label-input-eye {
@@ -131,22 +126,21 @@ body {
   font-size: 1rem;
   font-weight: bold;
   margin-bottom: 0.5rem;
-  color: rgb(228, 2, 2);
+  color: #ff3838;
 }
 
 .login-error {
-  color: rgb(228, 2, 2);
+  color: #ff3838;
 }
 
 .login-success {
-  color: rgb(13, 143, 41);
+  color: #0d8f29;
 }
 
 @media (max-width: 768px) {
   .landing-container {
     flex-direction: column;
-    box-shadow: 8px 8px 12px rgba(0, 0, 0, 0.0);
-    align-items: center; 
+    align-items: center;
   }
 
   .landing-photo {
@@ -155,9 +149,8 @@ body {
 
   .landing-form {
     width: 100%;
-    max-width: 400px; 
-    margin: 2rem; 
-    box-shadow: 8px 8px 12px rgba(0, 0, 0, 0.4);
+    max-width: 400px;
+    margin: 2rem;
   }
 
   .label-input {
@@ -169,14 +162,13 @@ body {
   }
 }
 
-/* NAVBAR START */
+/* NAVBAR */
 
 .navbar {
   display: flex;
   width: 100%;
   justify-content: space-between;
   align-items: center;
-  background-color: #333;
   color: white;
   padding: 10px;
   z-index: 1;
@@ -209,7 +201,7 @@ body {
 }
 
 .nav-link:hover {
-  color: #ddd3d3;
+  color: #aaa;
 }
 
 .burger {
@@ -236,23 +228,23 @@ body {
   .menu {
     display: none;
   }
-  
+
   .burger {
     display: block;
   }
-  
+
   .burger.active .line1 {
     transform: rotate(-45deg) translate(-5px, 6px);
   }
-  
+
   .burger.active .line2 {
     opacity: 0;
   }
-  
+
   .burger.active .line3 {
     transform: rotate(45deg) translate(-5px, -6px);
   }
-  
+
   .navbar.active .menu {
     display: flex;
     flex-direction: column;
@@ -260,7 +252,7 @@ body {
     justify-content: center;
     height: 100vh;
     text-align: center;
-    background-color: #333;
+    background-color: #1e1e1e;
     position: absolute;
     top: 45px;
     left: 0;
@@ -268,7 +260,7 @@ body {
     z-index: 1;
     overflow: hidden;
   }
-  
+
   .navbar.active .menu li {
     margin: 20px 0;
   }
