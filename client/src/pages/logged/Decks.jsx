@@ -3,9 +3,14 @@ import Navbar from '../components/Navbar';
 
 const Decks = () => {
   return (
+    <>
+    
+        <Navbar />
 
-    <Navbar />
+        <div className="container">
+        </div>
 
+    </>
   )
 }
 
