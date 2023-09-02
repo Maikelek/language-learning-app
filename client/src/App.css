@@ -267,3 +267,61 @@ body {
 }
 
 /* DECKS */
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #1e1e1e;
+  color: white;
+  box-shadow: 8px 8px 4px rgba(0, 0, 0, 0.4);
+  border-radius: 20px;
+
+  width: 90%;
+  height: 80vh;
+
+  margin: 4rem auto auto auto;
+  padding: 1rem;
+  gap: 30px;
+}
+
+.plus {
+  max-height: 7rem;
+  font-size: 40px;
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+}
+
+.deck {
+  display: flex;
+  flex-direction: column;
+  background-color: #333;
+  box-shadow: 8px 6px 2px rgba(0, 0, 0, 0.2);
+
+  max-height: 8.5rem;
+  padding: 1rem;
+  border-radius: 20px;
+  gap: 20px;
+  align-items: center;
+}
+
+.deck h3 {
+  font-size: 18px; 
+  color: #dfddddf5; 
+  text-transform: capitalize;
+  letter-spacing: 1px; 
+  font-weight: 400; 
+}
+
+
+.flag-holder {
+  padding: 10px;
+  border-radius: 15px;
+  max-width: 80px;
+  background-color: #1e1e1e;
+}
+
+.flag-holder img {
+  max-width: 100%;
+  max-height: 100%; 
+}
