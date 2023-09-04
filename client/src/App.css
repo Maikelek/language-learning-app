@@ -330,6 +330,18 @@ body {
   gap: 10px;
 }
 
+.revise-button {
+  background-color: #299e6d;
+  box-shadow: 8px 6px 2px rgba(0, 0, 0, 0.2);
+  color: rgb(255, 255, 255);
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: 0.3s ease-in-out;
+}
+
 .edit-button {
   background-color: #007bff;
   box-shadow: 8px 6px 2px rgba(0, 0, 0, 0.2);
@@ -352,6 +364,11 @@ body {
   cursor: pointer;
   font-size: 12px;
   transition: 0.3s ease-in-out;
+}
+
+.revise-button:hover {
+  transform: translateY(2px);
+  background-color: #187950;
 }
 
 .remove-button:hover {
@@ -418,6 +435,11 @@ body {
   .flag-holder {
     padding: 10px;
     max-width: 80px;
+  }
+
+  .revise-button {
+    padding: 5px 5px;
+    font-size: 12px;
   }
 
   .edit-button {
