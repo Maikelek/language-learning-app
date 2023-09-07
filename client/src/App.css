@@ -154,7 +154,7 @@ body {
   }
 
   .label-input {
-    width: 100%;
+    width: 80%;
   }
 
   .not-logged-button {
@@ -292,6 +292,11 @@ body {
   display: flex;
   justify-content: center; 
   align-items: center;
+  transition: transform 0.4s ease-in-out;
+}
+
+.plus:hover {
+  transform: scale(1.1);
 }
 
 .deck {
@@ -307,6 +312,57 @@ body {
   cursor: pointer;
   transition: 0.3s ease-in-out;
   position: relative;
+}
+
+.add-deck {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+.add-deck-ender {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  right: 0;
+  margin: 1rem;
+  font-size: 3rem;
+  color: white;
+  transition: 0.5s ease-in-out;
+}
+
+.add-deck-ender:hover {
+  transform: scale(1.1);
+}
+
+.add-deck-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  height: 50%;
+  background-color: #3b3838;
+  color: white;
+  border-radius: 50px;
+}
+
+.add-deck-select,
+.add-deck-input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #333;
+  background-color: #222;
+  color: #fff;
+  margin-top: 5px;
 }
 
 .hovered-deck {
