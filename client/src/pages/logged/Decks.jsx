@@ -92,8 +92,10 @@ const Decks = () => {
                 <div className="label-input">
                   <label htmlFor="deck_flag" className="label-classic">Flag</label>
                   <select name="deck_flag" id="deck_flag" className="add-deck-select">
+                    <option value="0">Choose your option</option>
                     <option value="flag_de">German</option>
                   </select>
+                  <button className='add-deck-button'>Create</button>
                 </div>
 
             </form>

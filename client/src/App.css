@@ -386,6 +386,25 @@ body {
   gap: 10px;
 }
 
+.add-deck-button {
+  align-self: center;
+  width: 60%;
+  margin-top: 2rem;
+  background-color: #1094ec;
+  color: white;
+  padding: 10px 20px; 
+  font-size: 16px; 
+  border: none; 
+  border-radius: 5px; 
+  cursor: pointer;
+  transition: 0.5s ease-in-out;
+}
+
+.add-deck-button:hover {
+  transform: translateY(1px);
+  background-color: #0c77be;
+}
+
 .revise-button {
   background-color: #299e6d;
   box-shadow: 8px 6px 2px rgba(0, 0, 0, 0.2);
