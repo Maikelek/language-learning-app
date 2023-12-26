@@ -67,12 +67,9 @@ const Register = () => {
         withCredentials: true
       });
   
-      if (response.data.message === "ok") {
-        console.log("test");
-      } else {
+      if (response.data.message ) {
         setMsg(response.data);
-        console.log(msg)
-      }
+      } 
     } catch (error) {
       console.log(error);
       alert(error);

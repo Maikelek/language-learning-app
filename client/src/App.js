@@ -1,33 +1,36 @@
 import {BrowserRouter,Routes,Route} from "react-router-dom";
+import { AuthProvider } from './pages/hooks/AuthProvider';
 
 import Index from "./pages/notLogged/Index"
 import Register from "./pages/notLogged/Register"
 
-import Profile from "./pages/logged/Profile";
 import Decks from "./pages/logged/Decks";
 import Deck from "./pages/logged/Deck";
 import Review from "./pages/logged/Review";
+import DeckEdit from "./pages/logged/DeckEdit";
 
 import "./App.css";
 
 function App() {
   return ( 
     <div className="App">
-      <BrowserRouter>  
-        <Routes>
+      <AuthProvider>
+        <BrowserRouter>  
+          <Routes>
 
-          <Route path="*" element={<Index/>}/>
+            <Route path="*" element={<Index/>}/>
 
-          <Route path="/" element={<Index/>}/>
-          <Route path="/register" element={<Register/>}/>
+            <Route path="/" element={<Index/>}/>
+            <Route path="/register" element={<Register/>}/>
 
-          <Route path="/profile" element={<Profile/>}/>
-          <Route path="/decks" element={<Decks/>}/>
-          <Route path="/deck/:id" element={<Deck/>}/>
-          <Route path="/review/:id" element={<Review/>}/>
+            <Route path="/decks" element={<Decks/>}/>
+            <Route path="/deck/:id" element={<Deck/>}/>
+            <Route path="/review/:id" element={<Review/>}/>
+            <Route path="/deck/edit/:id" element={<DeckEdit/>}/>
 
-        </Routes>
-      </BrowserRouter>
+          </Routes>
+        </BrowserRouter>
+      </AuthProvider>
     </div>
   );
 }

@@ -489,6 +489,42 @@ body {
   max-height: 100%; 
 }
 
+.deck-table {
+  width: 98%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.deck-table th,
+.deck-table td {
+  padding: 15px;
+  border: 1px solid #555;
+  color: white;
+  text-align: left;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.deck-table th {
+  background-color: #1e1e1e;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.deck-table tbody tr:nth-child(even) {
+  background-color: #333; 
+}
+
+.deck-table tbody tr:nth-child(odd) {
+  background-color: #292929; 
+}
+
+.button-holder {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+
 @media (max-width: 768px) {
   .container {
     padding: 1rem 0 0 1rem;
@@ -529,5 +565,11 @@ body {
 
   .hovered-deck-center {
     gap: 20px;
+  }
+
+  .add-deck-form {
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
   }
 }

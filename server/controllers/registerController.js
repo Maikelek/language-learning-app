@@ -3,7 +3,6 @@ const db = require("../db");
 
 
 const userRegister = (req, res) => {
-   
     const name = req.body.name;
     const email = req.body.email;
     const pass = req.body.pass;

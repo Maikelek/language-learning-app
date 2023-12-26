@@ -25,42 +25,15 @@ const isUserValid = (req, res) => {
       if (!match) {
         return res.json({ message: "Your email or password is wrong!" });
       }
-
-      const user = {
-        id: results[0].user_id,
-        nickname: results[0].nickname,
-        email: results[0].email,
-      };
   
-      jwt.sign(user, process.env.JWT_SECRET, { expiresIn: "1d" }, (err, token) => {
-        if (err) {
-          console.error(err);
-          return res.json({ message: "Failed to generate token" });
-        }
+      const token = jwt.sign({ userId: results[0].user_id, isAdmin: results[0].user_is_admin }, process.env.JWT_SECRET);
   
-        return res.json({ token, message: "ok" });;
+      return res.json({ token, message: "ok" });;
   
       });
-    });
   };
 
-const deleteSession = (req, res) => {
-    if ( req.session.user ) {
-        req.session.destroy(err => {
-            if (err) {
-                res.send({logout: false, message: "Problem with logging out"})
-            } else {
-                res.send({logout: true}) 
-            }
-        })
-    } 
-    
-    else {
-          res.send({logout: false, message: "Session does not exist"})
-       }
-}
 
 module.exports = {
     isUserValid,
-    deleteSession
 }
