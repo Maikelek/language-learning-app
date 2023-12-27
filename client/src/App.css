@@ -129,12 +129,30 @@ body {
   color: #ff3838;
 }
 
+.label-error-deck {
+  font-size: 1rem;
+  font-weight: bold;
+  margin: 5px 5px;
+  color: #ff3838;
+}
+
 .login-error {
   color: #ff3838;
 }
 
 .login-success {
   color: #0d8f29;
+}
+
+.loading-screen {
+  display: flex;
+  font-size: 5rem;
+  color: #fff;
+  background-color: #1e1e1e;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 90vh;
 }
 
 @media (max-width: 768px) {
@@ -378,6 +396,7 @@ body {
   align-items: center;
   justify-content: center;
   gap: 10px;
+  transition: opacity 0.5s ease-in-out;
 }
 
 .hovered-deck-center {

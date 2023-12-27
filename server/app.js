@@ -24,6 +24,9 @@ app.use('/register', registerRouter);
 const authRouter = require('./routes/authRouter');
 app.use('/auth', authRouter);
 
+const deckRouter = require('./routes/deckRouter');
+app.use('/deck', deckRouter);
+
 app.listen(process.env.PORT, () =>{      
     console.log("Backend is on port " + process.env.PORT);
 })
