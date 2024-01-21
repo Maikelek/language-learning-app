@@ -402,6 +402,7 @@ body {
 .hovered-deck-center {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 10px;
 }
 
@@ -418,6 +419,11 @@ body {
   cursor: pointer;
   transition: 0.5s ease-in-out;
 }
+
+.centered-content {
+  margin: auto;
+}
+
 
 .add-deck-button:hover {
   transform: translateY(1px);
@@ -442,7 +448,7 @@ body {
   color: rgb(255, 255, 255);
   border: none;
   border-radius: 5px;
-  padding: 10px 15px;
+  padding: 10px 23px;
   cursor: pointer;
   font-size: 12px;
   transition: 0.3s ease-in-out;

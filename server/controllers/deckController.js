@@ -47,7 +47,38 @@ const createDeck = (req, res) => {
     });
 }
 
+const addCard = (req, res) => {
+    const id  = req.body.id;
+    const front = req.body.front;
+    const back = req.body.back;
+    const status = req.body.status;
+    const q = "INSERT INTO cards (`card_front`,`card_back`,`card_status`,`from_deck`) VALUES (?,?,?,?)";
+
+    db.query(q, [front, back, status, id], (error, results) => {
+        if (error) {
+            return console.log(error);
+        }
+
+        return res.json({ message: "Card was added" });
+    });
+}
+
+const getCards = (req, res) => {
+    const deck_id = req.params.deckId;
+    const q = "SELECT * FROM cards WHERE from_deck = ?";
+
+    db.query(q, [deck_id], (error, results) => {
+        if (error) {
+            return console.log(error);
+        }
+
+        return res.json(results);
+    });
+}
+
 module.exports = {
     getDecks,
-    createDeck
+    createDeck,
+    addCard,
+    getCards
 };

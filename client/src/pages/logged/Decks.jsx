@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import axios from 'axios';
 
@@ -36,7 +37,7 @@ const Decks = () => {
         setDecks(response.data);
         setTimeout(() => {
           setLoading(false);
-        }, 1000);
+        }, 500);
       } catch (error) {
         console.error('Error fetching decks:', error);
         setLoading(false);
@@ -120,7 +121,7 @@ const Decks = () => {
                   <div className='hovered-deck'>
                     <div className="hovered-deck-center">
                       <button className='revise-button'>Revise <FontAwesomeIcon icon={faPuzzlePiece} /></button>
-                      <button className='edit-button'>Edit <FontAwesomeIcon icon={faEdit} /></button>
+                      <Link to={`/deck/edit/${deck.deck_id}`}><button className='edit-button'>Edit <FontAwesomeIcon icon={faEdit} /></button></Link>
                       <button className='remove-button'>Remove <FontAwesomeIcon icon={faTrash} /></button>
                     </div>
                   </div>
@@ -128,7 +129,7 @@ const Decks = () => {
               </div>
             ))
           ) : (
-            <p>Decks data is not in the expected format.</p>
+            <p className='deck' style={{cursor: "default"}}>You don't have any decks</p>
           )}
 
           <div className='plus' onClick={handleClick}>
