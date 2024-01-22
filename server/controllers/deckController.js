@@ -64,7 +64,7 @@ const addCard = (req, res) => {
 }
 
 const getCards = (req, res) => {
-    const deck_id = req.params.deckId;
+    const deck_id = req.params.id;
     const q = "SELECT * FROM cards WHERE from_deck = ?";
 
     db.query(q, [deck_id], (error, results) => {
@@ -76,9 +76,45 @@ const getCards = (req, res) => {
     });
 }
 
+const deleteCard = (req, res) => {
+    const card_id = req.params.id;
+    const q = "DELETE FROM cards WHERE card_id = ?";
+
+    db.query(q, [card_id], (error, results) => {
+        if (error) {
+            return console.log(error);
+        }
+
+        return res.json("Deleted card");
+    });
+}
+
+const deleteDeck = (req, res) => {
+    const deck_id = req.params.id;
+    const q1 = "DELETE FROM decks WHERE deck_id = ?";
+    const q2 = "DELETE FROM cards WHERE from_deck = ?";
+
+    db.query(q1, [deck_id], (error, results) => {
+        if (error) {
+            return console.log(error);
+        }
+
+        db.query(q2, [deck_id], (error, results) => {
+            if (error) {
+                return console.log(error);
+            }
+            return res.json("Deleted deck");
+        });
+
+    });
+}
+
+
 module.exports = {
     getDecks,
     createDeck,
     addCard,
-    getCards
+    getCards,
+    deleteCard,
+    deleteDeck
 };

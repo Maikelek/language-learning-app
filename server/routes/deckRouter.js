@@ -8,9 +8,12 @@ router.route("/")
 router.route("/edit")  
     .post(deckController.addCard);
 
-router.route("/edit/:deckId")  
-    .get(deckController.getCards);
+router.route("/edit/:id")  
+    .get(deckController.getCards)
+    .delete(deckController.deleteCard);
 
+router.route("/:id")  
+    .delete(deckController.deleteDeck);
 
 router.route("/:userId")
     .get(deckController.getDecks);

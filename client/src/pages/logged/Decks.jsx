@@ -37,7 +37,7 @@ const Decks = () => {
         setDecks(response.data);
         setTimeout(() => {
           setLoading(false);
-        }, 500);
+        }, 250);
       } catch (error) {
         console.error('Error fetching decks:', error);
         setLoading(false);
@@ -64,6 +64,18 @@ const Decks = () => {
   const handleUnhover = () => {
     setHovered(false);
   };
+
+  const handleDeleteDeck = async (deckId) => {
+    try {
+      await axios.delete(`${config.apiUrl}/deck/${deckId}`, {
+        withCredentials: true
+      });
+      window.location.reload();
+    } catch (error) {
+      console.error('Error deleting deck:', error);
+    }
+  };
+  
 
   const handleCreateDeck = async () => {
     let validationErrors = {};
@@ -122,7 +134,7 @@ const Decks = () => {
                     <div className="hovered-deck-center">
                       <button className='revise-button'>Revise <FontAwesomeIcon icon={faPuzzlePiece} /></button>
                       <Link to={`/deck/edit/${deck.deck_id}`}><button className='edit-button'>Edit <FontAwesomeIcon icon={faEdit} /></button></Link>
-                      <button className='remove-button'>Remove <FontAwesomeIcon icon={faTrash} /></button>
+                      <button className='remove-button' onClick={() => handleDeleteDeck(deck.deck_id)}>Remove <FontAwesomeIcon icon={faTrash} /></button>
                     </div>
                   </div>
                 )}

@@ -36,7 +36,7 @@ const DeckEdit = () => {
       } finally {
         setTimeout(() => {
           setLoading(false);
-        }, 500);
+        }, 250);
       }
     };
 
@@ -61,15 +61,8 @@ const DeckEdit = () => {
         withCredentials: true,
       });
 
-      setErrorMessage("");
-      setIsAdding(false);
+      window.location.reload();
 
-      setFormData({
-        id: id,
-        front: "",
-        back: "",
-        status: "New Card",
-      });
     } catch (error) {
       console.error("Error submitting form data:", error);
     }
@@ -85,6 +78,19 @@ const DeckEdit = () => {
     });
     setErrorMessage("");
   };
+
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`${config.apiUrl}/deck/edit/${id}`, {
+        withCredentials: true,
+      });
+
+      window.location.reload();
+
+    } catch (error) {
+      console.error("Error deleting card:", error);
+    }
+  } 
 
   return (
     <>
@@ -175,7 +181,7 @@ const DeckEdit = () => {
                     <div className="button-holder">
 
                       <button className="edit-button">Edit</button>
-                      <button className="remove-button">Remove</button>
+                      <button className="remove-button" onClick={() => handleDelete(card.card_id)}>Remove</button>
                     </div>
                   </td>
                 </tr>
