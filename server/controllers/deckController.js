@@ -110,11 +110,28 @@ const deleteDeck = (req, res) => {
 }
 
 
+const editCard = (req, res) => {
+    const id = req.params.id;
+    const front = req.body.front;
+    const back = req.body.back;
+    const q = "UPDATE cards SET card_front = ?, card_back = ? WHERE card_id = ?";
+    
+    db.query(q, [front, back, id], (error, results) => {
+        if (error) {
+            return console.log(error);
+        }
+
+        return res.json("Updated card");
+    });
+}
+
+
 module.exports = {
     getDecks,
     createDeck,
     addCard,
     getCards,
     deleteCard,
-    deleteDeck
+    deleteDeck,
+    editCard
 };

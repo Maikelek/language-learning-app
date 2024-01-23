@@ -7,6 +7,7 @@ import config from "../../config/Config";
 const DeckEdit = () => {
   const location = useLocation();
   const id = location.pathname.split("/")[3];
+
   const [isAdding, setIsAdding] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [cards, setCards] = useState([]);
@@ -17,6 +18,8 @@ const DeckEdit = () => {
     status: "New Card",
   });
   const [loading, setLoading] = useState(true);
+  const [editingCardId, setEditingCardId] = useState(null);
+  const [cardFormData, setCardFormData] = useState({});
 
   useEffect(() => {
     const fetchData = async () => {
@@ -25,10 +28,9 @@ const DeckEdit = () => {
       }
 
       try {
-        const response = await axios.get(
-          `${config.apiUrl}/deck/edit/${id}`,
-          { withCredentials: true }
-        );
+        const response = await axios.get(`${config.apiUrl}/deck/edit/${id}`, {
+          withCredentials: true,
+        });
 
         setCards(response.data);
       } catch (error) {
@@ -43,10 +45,18 @@ const DeckEdit = () => {
     fetchData();
   }, [id]);
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({ ...prevData, [name]: value }));
-  };
+  useEffect(() => {
+    // Initialize card form data with an empty object for each card
+    const initialCardFormData = {};
+    cards.forEach((card) => {
+      initialCardFormData[card.card_id] = {
+        front: card.card_front,
+        back: card.card_back,
+        status: card.card_status,
+      };
+    });
+    setCardFormData(initialCardFormData);
+  }, [cards]);
 
   const handleSubmit = async (e) => {
     try {
@@ -62,7 +72,6 @@ const DeckEdit = () => {
       });
 
       window.location.reload();
-
     } catch (error) {
       console.error("Error submitting form data:", error);
     }
@@ -70,6 +79,7 @@ const DeckEdit = () => {
 
   const handleAdd = () => {
     setIsAdding(!isAdding);
+    setEditingCardId(null);
     setFormData({
       id: id,
       front: "",
@@ -86,11 +96,55 @@ const DeckEdit = () => {
       });
 
       window.location.reload();
-
     } catch (error) {
       console.error("Error deleting card:", error);
     }
-  } 
+  };
+
+  const handleEdit = (cardId) => {
+    if (!isAdding) {
+      setEditingCardId(cardId);
+      setFormData({
+        ...cardFormData[cardId],
+      });
+    }
+  };
+
+  const handleSaveEdit = async (cardId) => {
+    try {
+      await axios.put(
+        `${config.apiUrl}/deck/edit/${cardId}`,
+        cardFormData[cardId],
+        { withCredentials: true }
+      );
+
+      window.location.reload();
+    } catch (error) {
+      console.error("Error saving card:", error);
+    }
+    setEditingCardId(null);
+  };
+
+  const handleCancelEdit = () => {
+    setEditingCardId(null);
+  };
+
+  const handleInputChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleCardInputChange = (cardId, field, value) => {
+    setCardFormData((prevData) => ({
+      ...prevData,
+      [cardId]: {
+        ...prevData[cardId],
+        [field]: value,
+      },
+    }));
+  };
 
   return (
     <>
@@ -126,13 +180,13 @@ const DeckEdit = () => {
                 <tr>
                   <td>
                     <input
-                      onChange={handleInputChange}
                       type="text"
                       name="front"
                       className="input-classic"
                       placeholder="Card front"
+                      value={formData.front}
+                      onChange={handleInputChange}
                     />
-
                     {errorMessage && (
                       <p style={{ color: "red", margin: "1rem 0" }}>
                         {errorMessage}
@@ -141,17 +195,13 @@ const DeckEdit = () => {
                   </td>
                   <td>
                     <input
-                      onChange={handleInputChange}
                       type="text"
                       name="back"
                       className="input-classic"
                       placeholder="Card back"
+                      value={formData.back}
+                      onChange={handleInputChange}
                     />
-                    {errorMessage && (
-                      <p style={{ color: "red", margin: "1rem 0" }}>
-                        {errorMessage}
-                      </p>
-                    )}
                   </td>
                   <td>New card</td>
                   <td>
@@ -173,20 +223,74 @@ const DeckEdit = () => {
 
               {cards.map((card) => (
                 <tr key={card.card_id}>
-                  <td>{card.card_front}</td>
-                  <td>{card.card_back}</td>
+                  <td>
+                    {editingCardId === card.card_id ? (
+                      <input
+                        type="text"
+                        name="front"
+                        className="input-classic"
+                        value={cardFormData[card.card_id]?.front || ""}
+                        onChange={(e) =>
+                          handleCardInputChange(card.card_id, e.target.name, e.target.value)
+                        }
+                      />
+                    ) : (
+                      card.card_front
+                    )}
+                  </td>
+                  <td>
+                    {editingCardId === card.card_id ? (
+                      <input
+                        type="text"
+                        name="back"
+                        className="input-classic"
+                        value={cardFormData[card.card_id]?.back || ""}
+                        onChange={(e) =>
+                          handleCardInputChange(card.card_id, e.target.name, e.target.value)
+                        }
+                      />
+                    ) : (
+                      card.card_back
+                    )}
+                  </td>
                   <td>{card.card_status}</td>
                   <td>
-
                     <div className="button-holder">
-
-                      <button className="edit-button">Edit</button>
-                      <button className="remove-button" onClick={() => handleDelete(card.card_id)}>Remove</button>
+                      {editingCardId === card.card_id ? (
+                        <>
+                          <button
+                            className="revise-button"
+                            onClick={() => handleSaveEdit(card.card_id)}
+                          >
+                            Save
+                          </button>
+                          <button
+                            className="remove-button"
+                            onClick={handleCancelEdit}
+                          >
+                            Cancel
+                          </button>
+                        </>
+                      ) : (
+                        <>
+                          <button
+                            className="edit-button"
+                            onClick={() => handleEdit(card.card_id)}
+                          >
+                            Edit
+                          </button>
+                          <button
+                            className="remove-button"
+                            onClick={() => handleDelete(card.card_id)}
+                          >
+                            Remove
+                          </button>
+                        </>
+                      )}
                     </div>
                   </td>
                 </tr>
               ))}
-
             </tbody>
           </table>
         </div>

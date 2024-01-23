@@ -6,11 +6,12 @@ router.route("/")
     .post(deckController.createDeck);
 
 router.route("/edit")  
-    .post(deckController.addCard);
+    .post(deckController.addCard)
 
 router.route("/edit/:id")  
     .get(deckController.getCards)
-    .delete(deckController.deleteCard);
+    .delete(deckController.deleteCard)
+    .put(deckController.editCard);
 
 router.route("/:id")  
     .delete(deckController.deleteDeck);
