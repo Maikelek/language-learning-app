@@ -59,3 +59,20 @@ npm i
 ```
 npm start
 ```
+
+# Preview
+
+### Login Page
+<img src="project_preview/login_page.png">
+
+### Deck Page
+<img src="project_preview/deck_page.png">
+
+### Deck Page Hover
+<img src="project_preview/deck_hover.png">
+
+### Edit page
+<img src="project_preview/edit_page.png">
+
+### Deck review page
+<img src="project_preview/deck_review.png">

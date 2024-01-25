@@ -5,9 +5,20 @@ import axios from 'axios';
 
 import useAuth from '../hooks/useAuth';
 import config from '../../config/Config';
-import flag_de from "../../data/flags/flag_de.png"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCirclePlus, faTrash, faEdit, faPuzzlePiece, faCircleXmark } from '@fortawesome/free-solid-svg-icons';
+
+import flag_de from "../../data/flags/flag_de.png";
+import flag_fr from "../../data/flags/flag_fr.png";
+import flag_ru from "../../data/flags/flag_ru.png";
+import flag_es from "../../data/flags/flag_es.png";
+
+const flagImages = {
+  flag_de: flag_de,
+  flag_fr: flag_fr,
+  flag_ru: flag_ru,
+  flag_es: flag_es,
+};
 
 const Decks = () => {
   const { userId } = useAuth();
@@ -126,7 +137,7 @@ const Decks = () => {
                 onMouseEnter={handleHover}
                 onMouseLeave={handleUnhover}>
                 <div className="flag-holder">
-                  <img src={flag_de} alt="flag" />
+                  <img src={flagImages[deck.deck_flag]} alt="flag" />
                 </div>
                 <h3>{deck.deck_name}</h3>
                 {hovered && (
@@ -179,6 +190,9 @@ const Decks = () => {
                   >
                     <option value="0">Choose your option</option>
                     <option value="flag_de">German</option>
+                    <option value="flag_fr">French</option>
+                    <option value="flag_ru">Russian</option>
+                    <option value="flag_es">Spanish</option>
                   </select>
                   {errors.deck_flag && <p className="label-error-deck">{errors.deck_flag}</p>}
                   <button className='add-deck-button' type="button" onClick={handleCreateDeck}>
@@ -189,8 +203,7 @@ const Decks = () => {
           </div>
         )}
     </>
-  )
-}
-
+  );
+};
 
 export default Decks;
