@@ -6,7 +6,6 @@ import Register from "./pages/notLogged/Register"
 
 import Decks from "./pages/logged/Decks";
 import Deck from "./pages/logged/Deck";
-import Review from "./pages/logged/Review";
 import DeckEdit from "./pages/logged/DeckEdit";
 
 import "./App.css";
@@ -25,7 +24,6 @@ function App() {
 
             <Route path="/decks" element={<Decks/>}/>
             <Route path="/deck/:id" element={<Deck/>}/>
-            <Route path="/review/:id" element={<Review/>}/>
             <Route path="/deck/edit/:id" element={<DeckEdit/>}/>
 
           </Routes>

@@ -42,7 +42,7 @@ cd server/
 ```
 * Create there **.env** file 
 ```
-PORT=8080
+PORT=1245
 
 HOST=localhost
 DEV=root

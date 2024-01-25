@@ -132,7 +132,7 @@ const Decks = () => {
                 {hovered && (
                   <div className='hovered-deck'>
                     <div className="hovered-deck-center">
-                      <button className='revise-button'>Revise <FontAwesomeIcon icon={faPuzzlePiece} /></button>
+                      <Link to={`/deck/${deck.deck_id}`}><button className='revise-button'>Revise <FontAwesomeIcon icon={faPuzzlePiece} /></button></Link>
                       <Link to={`/deck/edit/${deck.deck_id}`}><button className='edit-button'>Edit <FontAwesomeIcon icon={faEdit} /></button></Link>
                       <button className='remove-button' onClick={() => handleDeleteDeck(deck.deck_id)}>Remove <FontAwesomeIcon icon={faTrash} /></button>
                     </div>

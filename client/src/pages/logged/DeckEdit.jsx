@@ -46,7 +46,6 @@ const DeckEdit = () => {
   }, [id]);
 
   useEffect(() => {
-    // Initialize card form data with an empty object for each card
     const initialCardFormData = {};
     cards.forEach((card) => {
       initialCardFormData[card.card_id] = {
@@ -273,18 +272,11 @@ const DeckEdit = () => {
                         </>
                       ) : (
                         <>
-                          <button
-                            className="edit-button"
-                            onClick={() => handleEdit(card.card_id)}
-                          >
-                            Edit
-                          </button>
-                          <button
-                            className="remove-button"
-                            onClick={() => handleDelete(card.card_id)}
-                          >
-                            Remove
-                          </button>
+                        {isAdding ===  false ?
+                          <button className="edit-button" onClick={() => handleEdit(card.card_id)}> Edit</button> 
+                         : null}
+
+                          <button className="remove-button" onClick={() => handleDelete(card.card_id)}>Remove</button>
                         </>
                       )}
                     </div>
