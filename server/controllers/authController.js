@@ -1,8 +1,5 @@
 const bcrypt = require("bcryptjs");
 const db = require("../db"); 
-const jwt = require('jsonwebtoken');
-
-
 
 const isUserValid = (req, res) => {
     const { email, pass } = req.body;
@@ -25,15 +22,38 @@ const isUserValid = (req, res) => {
       if (!match) {
         return res.json({ message: "Your email or password is wrong!" });
       }
-  
-      const token = jwt.sign({ userId: results[0].user_id, isAdmin: results[0].user_is_admin }, process.env.JWT_SECRET);
-  
-      return res.json({ token, message: "ok" });;
+      user = {id: results[0].user_id, name:results[0].nickname, email: results[0].email}
+      req.session.user = user;
+      return res.json({ message: "ok", user: user });
   
       });
-  };
+};
+
+const sessionExists = (req, res) => {
+  if ( req.session.user) {
+      res.send({ auth: true, user: req.session.user});
+  } else {
+      res.send({ auth: false, user: null});
+  }
+};
+
+const deleteSession = (req, res) => {
+  if ( req.session.user ) {
+      req.session.destroy(err => {
+          if (err) {
+              res.send({logout: false, message: "Problem with logging out"})
+          } else {
+              res.send({logout: true}) 
+          }
+      })
+  } else {
+        res.send({logout: false, message: "Session does not exist"})
+      }
+}
 
 
 module.exports = {
     isUserValid,
+    deleteSession,
+    sessionExists
 }

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import useAuth from '../hooks/useAuth';
+import axios from 'axios';
+import Config from '../../config/Config';
 
 const Navbar = () => {
   const nav = useNavigate();
-  const {logout} = useAuth();
   const [isNavActive, setIsNavActive] = useState(false);
   const location = useLocation();
 
@@ -22,9 +22,18 @@ const Navbar = () => {
     document.body.style.overflow = isNavActive ? 'visible' : 'hidden';
   };
 
-  const handleLogout = async (e) => {
-    await logout();
-    nav("/");
+  const handleLogout = async () => {
+    try {
+      const response = await axios.delete(`${Config.apiUrl}/auth`, { withCredentials: true });
+      if (response.data.logout) {
+        nav('/');
+      } else {
+        alert(response.data.message || 'Logout failed');
+      }
+    } catch (error) {
+      console.error('Logout error:', error);
+      alert('Error during logout');
+    }
   };
 
   return (

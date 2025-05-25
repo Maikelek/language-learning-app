@@ -24,7 +24,6 @@ const userRegister = (req, res) => {
             return res.json({ message: "The e-mail is already taken !" });
         }
 
-
         let hashedPassword = await bcrypt.hash(pass_repeat, 8);
 
         db.query('INSERT INTO users (`user_id`,`nickname`, `email`, `pass`) VALUES (0,?,?,?)', [name, email, hashedPassword], (error, results) =>{

@@ -1,10 +1,10 @@
 const express = require('express'); 
 const cors = require("cors"); 
+const session = require('express-session');
 
 require("dotenv").config();
 
 const app = express()
-
 app.use(express.json());
 
 app.use(cors({
@@ -13,6 +13,18 @@ app.use(cors({
   credentials: true
 }));
 
+app.use(
+  session({
+    key: "user",
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      httpOnly: true,
+      expires: 86400000 // 1 day
+    }
+  })
+);
 
 app.get("/", (req, res) => { 
   return res.json("Backend server VerboLingo");

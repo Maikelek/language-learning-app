@@ -4,13 +4,11 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import bobur from '../../data/bobr.png';
 import config from '../../config/Config';
-import useAuth from '../../pages/hooks/useAuth';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash, faHeart } from '@fortawesome/free-solid-svg-icons';
 
 const Index = () => {
   const nav = useNavigate();
-  const { login, userId } = useAuth();
   const [eye, setEye] = useState(faEye);
   const [msg, setMsg] = useState({});
   const [error, setError] = useState(false);
@@ -52,7 +50,6 @@ const Index = () => {
       });
 
       if (response.data.message === 'ok') {
-        login(response.data.token); 
         nav('/Decks');
       } else {
         setMsg(response.data);
